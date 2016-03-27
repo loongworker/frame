@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 引入配置文件 -->
+	<properties resource="application.properties"/>
+	
+	<!-- 指定数据连接驱动jar地址 -->
+	<classPathEntry location="D:\maven\Repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+	
+	<!-- 一个数据库一个context -->
+	<context id="bovininet">
+		<!-- 注释 -->
+		<commentGenerator >
+			<property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+			<property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳-->
+		</commentGenerator>
+		
+		<!-- jdbc连接
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/bovininet" userId="bovininet"
+			password="bovininet" /> -->
+			
+	<jdbcConnection driverClass="${jdbc.driver}"  
+            connectionURL="${jdbc.url}" userId="${jdbc.username}"  
+            password="${jdbc.password}" />  
+		
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="true"/>
+		</javaTypeResolver>
+		
+		<!-- 生成实体类地址 -->	
+		<javaModelGenerator targetPackage="com.loong.frame.crm.entity"
+			targetProject="b_kry" >
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false"/>
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+		<!-- 生成mapxml文件 -->
+		<sqlMapGenerator targetPackage="com.loong.frame.crm.dao"
+			targetProject="b_kry" >
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		
+		<!-- 生成mapxml对应client，也就是接口dao -->	
+		<javaClientGenerator targetPackage="com.loong.frame.crm.dao"
+			targetProject="b_kry" type="XMLMAPPER" >
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<!-- 配置表信息 -->
+		<table schema="calm_test" tableName="fans" domainObjectName="Fans"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+	</context>
+</generatorConfiguration>
